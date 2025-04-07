@@ -4,11 +4,7 @@ project(knife)
 # Enable C++17 or later
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-# Set consistent runtime library for all targets
-if(MSVC)
-    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-endif()
+set(gtest_force_shared_crt ON CACHE BOOL "Use shared CRT with GoogleTest" FORCE)
 
 # Add your library
 add_library(knife INTERFACE)
