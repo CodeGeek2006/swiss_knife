@@ -3,6 +3,7 @@ project(knife)
 
 # Enable C++17 or later
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Add your library
 add_library(knife INTERFACE)

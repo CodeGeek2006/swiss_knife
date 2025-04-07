@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+
+# Build litter
+build/*
+!build/.gitkeep
