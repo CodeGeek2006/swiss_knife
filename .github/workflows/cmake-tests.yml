@@ -1,0 +1,29 @@
+on:
+  push:
+    branches: [ '*' ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: 'recursive'
+        
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake make
+      
+    - name: Run tests (basic)
+      run: make test
+      
+    - name: Run tests (verbose) 
+      if: ${{ failure() }}  # runs if previous test step fails
+      run: make test-verbose
