@@ -5,6 +5,11 @@ project(knife)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Set consistent runtime library for all targets
+if(MSVC)
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+endif()
+
 # Add your library
 add_library(knife INTERFACE)
 target_include_directories(knife INTERFACE ${CMAKE_SOURCE_DIR}/knife)

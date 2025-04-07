@@ -31,9 +31,6 @@ jobs:
       run: |
         choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'
         choco install make
-        
-    - name: Build using Makefile
-      run: make build
       
     - name: Run tests (basic)
       run: make test
