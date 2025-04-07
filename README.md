@@ -1,6 +1,7 @@
-# swiss_knife
+# swiss_knife 🔪
 A standard library extension for c++ to include some of the popular algorithms.
 
+---
 # Swiss Knife Development Guide
 
 This guide explains how to set up the development environment and run tests for the Swiss Knife project.
@@ -105,4 +106,4 @@ View results in GitHub Actions tab.
 
 ## Need Help? - Cry
 
-Kidding, contact [legend himself]('t.me/shiroyash_a') in Telegram
+Kidding, contact [legend himself](https://t.me/shiroyash_a) in Telegram
