@@ -1,8 +1,6 @@
 # swiss_knife
 A standard library extension for c++ to include some of the popular algorithms.
 
-Here's a comprehensive **Markdown guide** for collaborators to clone your repository and run tests:
-
 # Swiss Knife Development Guide
 
 This guide explains how to set up the development environment and run tests for the Swiss Knife project.
