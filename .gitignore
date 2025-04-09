@@ -34,3 +34,6 @@
 # Build litter
 build/*
 !build/.gitkeep
+
+.idea/
+cmake-build-debug/
