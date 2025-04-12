@@ -35,4 +35,11 @@ namespace knife::sorting {
         quick_sort(begin, _end, compare);
         quick_sort(left, end, compare);
     }
+
+    template <typename iterator>
+    void quick_sort(iterator* begin, iterator* end) {
+        quick_sort(begin, end, [](const iterator& a, const iterator& b) {
+            return a < b;
+        });
+    }
 } // knife::sorting namespace
