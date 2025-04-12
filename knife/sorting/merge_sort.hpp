@@ -1,43 +1,46 @@
-namespace knife::sorting{
-    template <typename M>
-    std::vector<M> merge(std::vector<M> left, std::vector<M> right){
-        std::vector<M> result;
-        int l=0,r=0;
-        while(l!=left.size() || r!=right.size()){
-            if(l==left.size()){
-                result.push_back(right[r]);
-                r++;
-            } else if(r == right.size()){
-                result.push_back(left[l]);
-                l++;
-            } else if(left[l]<right[r]){
-                result.push_back(left[l]);
-                l++;
+namespace knife::sorting {
+
+    template <typename iterator, typename comparator>
+    void merge(iterator* begin, iterator* mid, iterator* end, comparator comp) {
+        const auto size = end - begin;
+        iterator* temp = new iterator[size];
+        iterator* temp_ptr = temp;
+        
+        iterator* left = begin;
+        iterator* right = mid;
+        
+        while (left != mid && right != end) {
+            if (comp(*left, *right)) {
+                *temp_ptr++ = std::move(*left++);
             } else {
-                result.push_back(right[r]);
-                r++;
+                *temp_ptr++ = std::move(*right++);
             }
         }
-        return result;
+        
+        while (left != mid) *temp_ptr++ = std::move(*left++);
+        while (right != end) *temp_ptr++ = std::move(*right++);
+        
+        std::move(temp, temp + size, begin);
+        delete[] temp;
     }
 
-    template <typename G>
-    std::vector<G> merge_recursion(int begin, int end, std::vector<G> arr){
-        if(begin==end){
-            return {arr[begin]};
-        }
-        int mid = (begin+end)/2;
-        std::vector<G> left = merge_recursion(begin, mid, arr);
-        std::vector<G> right = merge_recursion(mid+1, end, arr);
-        return merge(left, right);
+    template <typename iterator, typename comparator>
+    void merge_sort(iterator* begin, iterator* end, comparator comp) {
+        const auto size = end - begin;
+        if (size <= 1) return;
+        
+        iterator* mid = begin + size / 2;
+        
+        merge_sort(begin, mid, comp);
+        merge_sort(mid, end, comp);
+        
+        merge(begin, mid, end, comp);
     }
 
-    template <typename T>
-    std::vector<T> merge_sort(std::vector<T> arr) {
-        if(arr.size()==0){
-            return {};
-        }
-        return merge_recursion(0, int(arr.size()-1), arr);
+    template <typename iterator>
+    void merge_sort(iterator* begin, iterator* end) {
+        merge_sort(begin, end, [](const iterator& a, const iterator& b) {
+            return a < b;
+        });
     }
-}
-
+} // knife::sorting namespace
