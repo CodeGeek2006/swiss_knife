@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <stdexcept>
+#include "../../knife/graph/list_node.hpp"
 
 namespace knife {
     template<typename T>
