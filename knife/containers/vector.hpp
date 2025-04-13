@@ -83,7 +83,7 @@ template <typename T>
             return data + length;
         }
 
-        friend std::ostream& operator<<(std::ostream& os, const stack& stack);
+        friend std::ostream& operator<<(std::ostream& os, const vector& vector);
 
         void resize(int new_size) {
             if (new_size < length) {

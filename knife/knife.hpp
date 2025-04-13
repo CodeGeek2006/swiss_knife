@@ -3,6 +3,9 @@
 #include "sorting/merge_sort.hpp"
 #include "containers/stack.hpp"
 #include "containers/vector.hpp"
+#include "graph/binary_tree.hpp"
+#include "graph/disjoint_set.hpp"
+#include "graph/trie.hpp"
 
 namespace knife {
     using namespace sorting;

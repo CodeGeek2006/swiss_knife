@@ -16,7 +16,7 @@ namespace knife::graph {
         }
 
         T find(const T& item) {
-            if(parent.find(item)==param.end()){
+            if(parent.find(item)==parent.end()){
                 parent[item] = item;
             }
             // path compression
