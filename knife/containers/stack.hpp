@@ -6,10 +6,10 @@
 
 namespace knife::containers {
     template<typename T>
-    class stack : public range<graph::list_node<T>> {
+    class stack : public virtual range<graph::list_node<T>> {
     protected:
         graph::list_node<T>* stack_pointer;
-        int length;
+        unsigned int length;
     
     public:
         stack() : range<graph::list_node<T>>() {
@@ -93,11 +93,11 @@ namespace knife::containers {
 
         friend std::ostream& operator<<(std::ostream& os, const stack& stack);
         
-        graph::list_node<T>* begin() const {
+        graph::list_node<T>* begin() {
             return stack_pointer;
         }
 
-        graph::list_node<T>* end() const {
+        graph::list_node<T>* end() {
             return nullptr;
         }
         

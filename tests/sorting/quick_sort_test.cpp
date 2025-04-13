@@ -3,7 +3,7 @@
 #include <vector>
 #include <iostream>
 
-TEST(QuickSortSimpleTest, BasicAssertions) {
+TEST(QuickSortTest, BasicAssertions) {
     //just a simple case
     std::vector<int> nums{7, 1, 4, 9};
     std::vector<int> sorted_nums{1, 4, 7, 9};

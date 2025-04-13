@@ -1,23 +1,22 @@
 #pragma once
 #include <stdexcept>
+#include "range.hpp"
 
 namespace knife::containers{
 template <typename T>
-    class vector {
+    class vector : public virtual range<T> {
         T* data;
         unsigned int capacity;
         unsigned int length;
 
     public:
 
-        //Default constructor
         vector() {
             capacity = 2;
             length = 0;
             data = new T[capacity];
         }
 
-        // Constructor that takes an initializer list
         vector(std::initializer_list<T> init) {
             length = capacity = init.size();
             data = new T[capacity];
@@ -27,8 +26,7 @@ template <typename T>
             }
         }
 
-        //Constructor with initial size and value
-    vector(unsigned int size, const T& value) {
+        vector(unsigned int size, const T& value) {
             this->capacity = size;
             this->length = size;
             data = new T[capacity];
@@ -36,13 +34,13 @@ template <typename T>
                 data[i] = value;
             }
         }
-        // Constructor with initial size
+
         vector(unsigned int size) {
             capacity = size;
             length = size;
             data = new T[capacity];
             for (unsigned int i = 0; i < length; ++i) {
-                data[i] = T();  // Default-initialize each element
+                data[i] = T();
             }
         }
 
@@ -51,46 +49,47 @@ template <typename T>
         }
 
         void push_back(T value) {
-            if (length == capacity) //If there is no capacity lefts, adds capacity (+1)
+            if (length == capacity) 
                 resize(length + 1);
             data[length++] = value;
         }
 
-        //Delete the last element
         void pop_back() {
             if (length > 0)
                 length--;
         }
 
-        //Return size
         int size() const {
             return length;
         }
 
-        //Allows using [] operator (to use vec[index])
-        T& operator[](int index) const{
+        T& operator[](int index) {
             if (index < 0 || index >= length)
                 throw std::out_of_range("Index out of bounds");
             return data[index];
         }
 
-        //Gives the address of first element
-        T* begin() const {
+        T at(int index) const {
+            if (index < 0 || index >= length)
+                throw std::out_of_range("Index out of bounds");
+            return data[index];
+        }
+
+        T* begin() {
             return data;
         }
 
-        //Gives the address of last element + 1 to you for ranged loop
-        T* end() const {
+        T* end() {
             return data + length;
         }
 
 
         void resize(int new_size) {
             if (new_size < length) {
-                length = new_size; //If new_size is less than initial size, decreases the initial size to New_size
+                length = new_size;
             }
             else if (new_size > length) {
-                if (new_size > capacity) { // if new_size more than capacity, adds needed capacity
+                if (new_size > capacity) { 
                     capacity += new_size-capacity;
                     T* _data = new T[capacity];
                     for (int i = 0; i < length; i++)
@@ -105,7 +104,6 @@ template <typename T>
             }
         }
 
-    // Resize the vector to a new size and fill new elements with the given value
     void resize(unsigned int new_size, const T& value) {
             if (new_size < length) {
                 length = new_size;
@@ -126,7 +124,6 @@ template <typename T>
             }
         }
 
-    // Erase a single element at the given iterator
     void erase(T* pos) {
             if (pos < data || pos >= data + length)
                 throw std::out_of_range("Iterator out of bounds");

@@ -6,8 +6,8 @@ namespace knife::containers {
         protected:
             T* data;
         public:
-            virtual T* begin() const = 0;
-            virtual T* end() const = 0;
+            virtual T* begin() = 0;
+            virtual T* end() = 0;
             virtual ~range() = default;
     };
 } //knife::container
