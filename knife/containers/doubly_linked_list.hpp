@@ -5,69 +5,69 @@
 namespace knife {
     template<typename T>
 
-    class List {
+    class list {
     public:
-        class Node {
+        class node {
         public:
             T val;
-            Node* next;
-            Node* prev;
+            node* next;
+            node* prev;
 
-            Node( T value = nullptr) : val(value), next(nullptr), prev(nullptr) {}
+            node( T value = nullptr) : val(value), next(nullptr), prev(nullptr) {}
         };
-        Node *head;
-        Node *tail;
+        node *head;
+        node *tail;
     public:
 
 
-        List (){
+        list (){
             head = nullptr;
             tail = nullptr;
         }
-        void addFront(T val) {
-            Node *newNode = new Node (val);
+        void add_front(T val) {
+            node *new_node = new node (val);
             if (head==nullptr) {
 
-                head = newNode;
-                tail = newNode;
+                head = new_node;
+                tail = new_node;
             }
             else {
-                newNode->next = head;
-                head->prev = newNode;
-                head = newNode;
+                new_node->next = head;
+                head->prev = new_node;
+                head = new_node;
             }
         }
-        void addBack(T val) {
-            Node *newNode = new Node (val);
+        void add_back(T val) {
+            node *new_node = new node (val);
             if (head==nullptr) {
-                head = newNode;
-                tail = newNode;
+                head = new_node;
+                tail = new_node;
             }
             else {
-                newNode->prev= tail;
-                tail->next = newNode;
-                tail = newNode;
+                new_node->prev= tail;
+                tail->next = new_node;
+                tail = new_node;
             }
 
         }
 
-        T getFront() {
+        T get_front() {
             if (head==nullptr) throw std::runtime_error("Empty list");
             return head->val;
         }
 
 
         void display() {
-            Node* temp=head;
+            node* temp=head;
             while (temp!=nullptr) {
                 std::cout<<temp->val<<" ";
                 temp= temp ->next;
             }
         }
 
-        void removeFront() {
+        void remove_front() {
             if (head==nullptr) throw std::runtime_error("Empty list, cant delete the front");
-            Node *temp=head;
+            node *temp=head;
             head= head->next;
             delete temp;
             if ( head==nullptr) {
@@ -77,9 +77,9 @@ namespace knife {
                 head->prev=nullptr;
             }
         }
-        void removeTail() {
+        void remove_tail() {
             if (tail==nullptr) throw std::runtime_error("the lsit is empthy, cant remove tail");
-            Node *temp=tail;
+            node *temp=tail;
             tail= tail -> prev;
             delete temp;
             if (tail == nullptr )
@@ -89,8 +89,8 @@ namespace knife {
             }
         }
 
-        T getAt(int index) {
-            Node *temp=head;
+        T get_at(int index) {
+            node *temp=head;
             int i=0;
             while (temp!=nullptr) {
                 if (i==index) return temp->val;
@@ -103,13 +103,13 @@ namespace knife {
 
         }
 
-        void removeAt(int index) {
+        void remove_at(int index) {
 
             if (head == nullptr || index < 0) {
                 throw std::out_of_range("The index is out of range");
             }
 
-            Node *temp = head;
+            node *temp = head;
             int i = 0;
 
 
@@ -148,18 +148,17 @@ namespace knife {
 
 
 
-        void insertAd(int val, int index) {
+        void insert_at(int val, int index) {
             if (index < 0) {
                 throw std::out_of_range("The index is out of range");
             }
 
-            Node *newNode = new Node(val);
-            Node *temp = head;
+            node *new_node = new node(val);
+            node *temp = head;
             int i = 0;
 
-            // if head
             if (index == 0) {
-                addFront(val);
+                add_front(val);
                 return;
             }
 
@@ -174,12 +173,12 @@ namespace knife {
             }
 
 
-            newNode->next = temp;
-            newNode->prev = temp->prev;
+            new_node->next = temp;
+            new_node->prev = temp->prev;
             if (temp->prev != nullptr) {
-                temp->prev->next = newNode;
+                temp->prev->next = new_node;
             }
-            temp->prev = newNode;
+            temp->prev = new_node;
         }
 
 
@@ -187,5 +186,3 @@ namespace knife {
 }
 
 
-
-//when head==nullptr empty
