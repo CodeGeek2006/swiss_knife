@@ -1,124 +1,109 @@
-#include <iostream>
+#pragma once
+
 #include <stdexcept>
+#include "range.hpp"
+#include "../graph/list_node.hpp"
 
 namespace knife::containers {
     template<typename T>
-    class stack {
+    class stack : public range<graph::list_node<T>> {
     protected:
-        class stack_node {
-        public:
-            stack_node* next;
-            T data;
-            
-            stack_node() {
-                next = nullptr;
-            }
-            stack_node(T data) {
-                next = nullptr;
-                this->data = data;
-            }
-        };
-    
-        stack_node* stack_pointer;
-        int size;
+        graph::list_node<T>* stack_pointer;
+        int length;
     
     public:
-        // initializes stack
-        stack() {
+        stack() : range<graph::list_node<T>>() {
             stack_pointer = nullptr;
-            size = 0;
+            length = 0;
         }
         
-        // checks if stack is empty
-        bool is_empty() const {
+        bool empty() const {
             return stack_pointer == nullptr;
         }
         
-        // adds new node
-        void stack_push(T data) {
-            stack_node* nn = new stack_node(data);
+        void push(T val) {
+            graph::list_node<T>* nn = new graph::list_node<T>(val);
             nn->next = stack_pointer;
             stack_pointer = nn;
-            size++;
+            length++;
         }
         
-        // deletes first node and returns its value
-        T stack_pop() {
-            if (is_empty()) {
+        T top() const {
+            if (empty()) {
+                throw std::runtime_error("Can't access top element on an empty stack");
+            }
+            return stack_pointer->val;
+        }
+
+        void pop() {
+            if (empty()) {
                 throw std::runtime_error("Can't pop from an empty stack");
             }
-            stack_node* tn = stack_pointer;
-            T val = tn->data;
+            graph::list_node<T>* tn = stack_pointer;
             stack_pointer = stack_pointer->next;
             delete tn;
-            size--;
-            return val;
+            length--;
         }
         
-        // gets value at index (stack pointer = 0)
-        T get_val_at_index(int index) {
-            if (0 > index || index >= size) {
+        T at(int index) const {
+            if (0 > index || index >= length) {
                 throw std::out_of_range("Index is out of bounds");
             }
-            stack_node* cn = stack_pointer;
+            graph::list_node<T>* cn = stack_pointer;
             for (int i = 0; i < index; i++) {
                 cn = cn->next;
             }
-            return cn->data;
+            return cn->val;
         }
         
-        // inserts at index
-        void insert_at_index(T data, int index) {
-            if (index < 0 || index > size) {
-                return; // invalid index
+        T& operator[](int index) {
+            if (0 > index || index >= length) {
+                throw std::out_of_range("Index is out of bounds");
+            }
+            graph::list_node<T>* cn = stack_pointer;
+            for (int i = 0; i < index; i++) {
+                cn = cn->next;
+            }
+            return cn->val;
+        }
+
+        void insert(T val, int index) {
+            if (index < 0 || index > length) {
+                return;
             }
             
             if (index == 0) {
-                stack_push(data); // insert at top
+                push(val);
                 return;
             }
             
-            stack_node* cn = stack_pointer;
+            graph::list_node<T>* cn = stack_pointer;
             for (int i = 0; i < index - 1; i++) {
                 cn = cn->next;
             }
-            stack_node* nn = new stack_node(data);
+            graph::list_node<T>* nn = new graph::list_node<T>(val);
             nn->next = cn->next;
             cn->next = nn;
-            size++;
+            length++;
         }
         
-        // returns the size of stack
-        int stack_size() const {
-          return size;
+        int size() const {
+          return length;
         }
+
+        friend std::ostream& operator<<(std::ostream& os, const stack& stack);
         
-        // outputs the stack
-        void print_stack() const{
-            if (is_empty()) {
-                std::cout << "Stack is empty" << std::endl;
-                return;
-            }
-            stack_node * cn = stack_pointer;
-            while (cn != nullptr) {
-                std::cout << cn -> data << " ";
-                cn = cn -> next;
-            }
-            std::cout << std::endl;
-        }
-        
-        stack_node* begin() const {
+        graph::list_node<T>* begin() const {
             return stack_pointer;
         }
 
-        stack_node* end() const {
+        graph::list_node<T>* end() const {
             return nullptr;
         }
         
-        // destructor
         ~stack() {
             while (stack_pointer != nullptr) {
-                stack_node* tn = stack_pointer;
+                graph::list_node<T>* tn = stack_pointer;
                 stack_pointer = stack_pointer->next;
                 delete tn;
             }
