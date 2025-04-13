@@ -93,11 +93,11 @@ namespace knife::containers {
 
         friend std::ostream& operator<<(std::ostream& os, const stack& stack);
         
-        graph::list_node<T>* begin() {
+        graph::list_node<T>* begin() const {
             return stack_pointer;
         }
 
-        graph::list_node<T>* end() {
+        graph::list_node<T>* end() const {
             return nullptr;
         }
         

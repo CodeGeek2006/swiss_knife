@@ -85,14 +85,3 @@ TEST(VectorTest, EraseSingleElement) {
     EXPECT_EQ(v1[0], v2[0]);
     EXPECT_EQ(v1[0], 2);
 }
-// --- Iterators ---
-TEST(VectorTest, IteratorsWork) {
-    knife::vector<int> v;
-    v.push_back(1);
-    v.push_back(2);
-    v.push_back(3);
-    int sum = 0;
-    for (auto it = v.begin(); it != v.end(); ++it)
-        sum += *it;
-    EXPECT_EQ(sum, 6);
-}

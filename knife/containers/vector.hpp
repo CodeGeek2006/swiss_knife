@@ -75,14 +75,15 @@ template <typename T>
             return data[index];
         }
 
-        T* begin() {
+        T* begin() const {
             return data;
         }
 
-        T* end() {
+        T* end() const {
             return data + length;
         }
 
+        friend std::ostream& operator<<(std::ostream& os, const stack& stack);
 
         void resize(int new_size) {
             if (new_size < length) {
