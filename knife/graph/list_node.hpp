@@ -1,17 +1,19 @@
 #pragma once
 
-namespace knife {
+namespace knife::graph {
+    // cautious, this class does not have destructor
     template<typename T>
-
-    class node {
-    public:
-        T val;
-        node* next;
-        node* prev;
-
-        node( T value = nullptr) : val(value), next(nullptr), prev(nullptr) {}
+    class list_node {
+        public:
+            list_node* next;
+            T val;
+            
+            list_node() {
+                next = nullptr;
+            }
+            list_node(T val) {
+                next = nullptr;
+                this->val = val;
+            }
     };
-
-
-
-    }
+} // namespace knife::graph
