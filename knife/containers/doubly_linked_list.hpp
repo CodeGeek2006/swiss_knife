@@ -7,7 +7,7 @@ namespace knife {
     template<typename T>
 
     class list {
-    public:
+    private:
         using list_node = knife::graph::list_node<T>;
         list_node *head;
         list_node *tail;
