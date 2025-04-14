@@ -37,3 +37,4 @@ build/*
 
 .idea/
 cmake-build-debug/
+knife/.DS_Store
