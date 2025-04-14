@@ -8,67 +8,52 @@ namespace knife {
 
     class list {
     public:
-        class node {
-        public:
-            T val;
-            node* next;
-            node* prev;
-
-            node( T value = nullptr) : val(value), next(nullptr), prev(nullptr) {}
-        };
-        node *head;
-        node *tail;
+        using list_node = knife::graph::list_node<T>;
+        list_node *head;
+        list_node *tail;
     public:
-
-
         list (){
             head = nullptr;
             tail = nullptr;
         }
-        void add_front(T val) {
-            node *new_node = new node (val);
+        void push_front(T val) {
+            list_node *new_list_node = new list_node (val);
             if (head==nullptr) {
 
-                head = new_node;
-                tail = new_node;
+                head = new_list_node;
+                tail = new_list_node;
             }
             else {
-                new_node->next = head;
-                head->prev = new_node;
-                head = new_node;
+                new_list_node->next = head;
+                head->prev = new_list_node;
+                head = new_list_node;
             }
         }
-        void add_back(T val) {
-            node *new_node = new node (val);
+        void push_back(T val) {
+            list_node *new_list_node = new list_node (val);
             if (head==nullptr) {
-                head = new_node;
-                tail = new_node;
+                head = new_list_node;
+                tail = new_list_node;
             }
             else {
-                new_node->prev= tail;
-                tail->next = new_node;
-                tail = new_node;
+                new_list_node->prev= tail;
+                tail->next = new_list_node;
+                tail = new_list_node;
             }
 
         }
 
-        T get_front() {
+        T front() {
             if (head==nullptr) throw std::runtime_error("Empty list");
             return head->val;
         }
 
 
-        void display() {
-            node* temp=head;
-            while (temp!=nullptr) {
-                std::cout<<temp->val<<" ";
-                temp= temp ->next;
-            }
-        }
+
 
         void remove_front() {
             if (head==nullptr) throw std::runtime_error("Empty list, cant delete the front");
-            node *temp=head;
+            list_node *temp=head;
             head= head->next;
             delete temp;
             if ( head==nullptr) {
@@ -78,9 +63,9 @@ namespace knife {
                 head->prev=nullptr;
             }
         }
-        void remove_tail() {
+        void pop_back() {
             if (tail==nullptr) throw std::runtime_error("the lsit is empthy, cant remove tail");
-            node *temp=tail;
+            list_node *temp=tail;
             tail= tail -> prev;
             delete temp;
             if (tail == nullptr )
@@ -90,8 +75,8 @@ namespace knife {
             }
         }
 
-        T get_at(int index) {
-            node *temp=head;
+        T at(int index) {
+            list_node *temp=head;
             int i=0;
             while (temp!=nullptr) {
                 if (i==index) return temp->val;
@@ -104,13 +89,13 @@ namespace knife {
 
         }
 
-        void remove_at(int index) {
+        void pop_at(int index) {
 
             if (head == nullptr || index < 0) {
                 throw std::out_of_range("The index is out of range");
             }
 
-            node *temp = head;
+            list_node *temp = head;
             int i = 0;
 
 
@@ -149,17 +134,17 @@ namespace knife {
 
 
 
-        void insert_at(int val, int index) {
+        void insert(int val, int index) {
             if (index < 0) {
                 throw std::out_of_range("The index is out of range");
             }
 
-            node *new_node = new node(val);
-            node *temp = head;
+            list_node *new_list_node = new list_node(val);
+            list_node *temp = head;
             int i = 0;
 
             if (index == 0) {
-                add_front(val);
+                push_front(val);
                 return;
             }
 
@@ -174,12 +159,12 @@ namespace knife {
             }
 
 
-            new_node->next = temp;
-            new_node->prev = temp->prev;
+            new_list_node->next = temp;
+            new_list_node->prev = temp->prev;
             if (temp->prev != nullptr) {
-                temp->prev->next = new_node;
+                temp->prev->next = new_list_node;
             }
-            temp->prev = new_node;
+            temp->prev = new_list_node;
         }
 
 

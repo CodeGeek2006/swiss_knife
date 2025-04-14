@@ -1,3 +1,4 @@
+#pragma once
 namespace knife::utils {
     template<typename T>
     void swap(T& first, T& second){
