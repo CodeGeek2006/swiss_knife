@@ -10,4 +10,4 @@ namespace knife::containers {
             virtual T* end() const = 0;
             virtual ~range() = default;
     };
-} //knife::container
+} // namespace knife::container

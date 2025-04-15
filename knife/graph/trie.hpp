@@ -9,4 +9,4 @@ namespace knife::graph {
             trie() = default;
             trie(const T& _val): val(std::move(_val)){}
     };
-}
+} // namespace knife::graph

@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include "range.hpp"
 
-namespace knife::containers{
+namespace knife::containers {
 template <typename T>
     class vector : public virtual range<T> {
         T* data;
@@ -136,5 +136,5 @@ template <typename T>
             // Decrease length
             --length;
         }
-};
-}
+    };
+}   // namespace knife::containers

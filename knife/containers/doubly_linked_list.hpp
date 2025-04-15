@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include "../../knife/graph/list_node.hpp"
 
-namespace knife {
+namespace knife::containers {
     template<typename T>
 
     class list {
@@ -169,6 +169,6 @@ namespace knife {
 
 
     };
-}
+} // namespace knife::containers
 
 

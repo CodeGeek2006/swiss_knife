@@ -19,4 +19,4 @@ namespace knife::graph {
                 }
             }
     };
-}
+} // namespace knife::graph

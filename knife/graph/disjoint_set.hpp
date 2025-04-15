@@ -39,4 +39,4 @@ namespace knife::graph {
             return find(a) == find(b);
         }
     };
-}
+} // namespace knife::graph
