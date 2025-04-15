@@ -2,7 +2,7 @@
 #include "../../knife/containers/doubly_linked_list.hpp"
 
 TEST(PushFrontTest, BasicAssertions) {
-    knife::list<int> list;
+    knife::containers::list<int> list;
     list.push_front(10);
     list.push_back(20);
     list.push_front(5);
@@ -12,7 +12,7 @@ TEST(PushFrontTest, BasicAssertions) {
 }
 
 TEST(PushBackTest, BasicAssertions) {
-    knife::list<int> list;
+    knife::containers::list<int> list;
     list.push_front(10);
     list.push_back(20);
     list.push_front(5);
@@ -22,7 +22,7 @@ TEST(PushBackTest, BasicAssertions) {
 }
 
 TEST(FrontTest, BasicAssertions) {
-    knife::list<int> list;
+    knife::containers::list<int> list;
     list.push_front(10);
     list.push_back(20);
     list.push_front(5);
@@ -31,7 +31,7 @@ TEST(FrontTest, BasicAssertions) {
 }
 
 TEST(RemoveFrontTest, BasicAssertions) {
-    knife::list<int> list;
+    knife::containers::list<int> list;
     list.push_front(10);
     list.push_back(20);
     list.push_front(5);
@@ -41,7 +41,7 @@ TEST(RemoveFrontTest, BasicAssertions) {
 }
 
 TEST(PopBackTest, BasicAssertions) {
-    knife::list<int> list;
+    knife::containers::list<int> list;
     list.push_front(10);
     list.push_back(20);
     list.push_front(5);
@@ -51,7 +51,7 @@ TEST(PopBackTest, BasicAssertions) {
 }
 
 TEST(AtTest, BasicAssertions) {
-    knife::list<int> list;
+    knife::containers::list<int> list;
     list.push_front(10);
     list.push_back(20);
     list.push_front(5);
@@ -62,7 +62,7 @@ TEST(AtTest, BasicAssertions) {
 }
 
 TEST(PopAtTest, BasicAssertions) {
-    knife::list<int> list;
+    knife::containers::list<int> list;
     list.push_front(10);
     list.push_front(5);
     list.push_front(15);
@@ -75,7 +75,7 @@ TEST(PopAtTest, BasicAssertions) {
 }
 
 TEST(InsertTest, BasicAssertions) {
-    knife::list<int> list;
+    knife::containers::list<int> list;
     list.push_front(10);
     list.push_back(20);
     list.push_front(5);
@@ -85,19 +85,19 @@ TEST(InsertTest, BasicAssertions) {
 }
 
 TEST(RemoveFromEmptyListTest, BasicAssertions) {
-    knife::list<int> list;
+    knife::containers::list<int> list;
 
     EXPECT_THROW(list.remove_front(), std::runtime_error);
 }
 
 TEST(PopBackFromEmptyListTest, BasicAssertions) {
-    knife::list<int> list;
+    knife::containers::list<int> list;
 
     EXPECT_THROW(list.pop_back(), std::runtime_error);
 }
 
 TEST(InvalidIndexTest, BasicAssertions) {
-    knife::list<int> list;
+    knife::containers::list<int> list;
     list.push_front(10);
     list.push_back(20);
     list.push_front(5);
